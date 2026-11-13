@@ -1,0 +1,21 @@
+[package]
+name = "tun2proxy-bin"
+version = "0.8.2"
+edition = "2021"
+authors = ["Shadowsocks Contributors"]
+description = "Android JNI bridge for tun2proxy TUN-to-SOCKS/HTTP proxy engine"
+
+[lib]
+name = "tun2proxy"
+crate-type = ["cdylib", "staticlib"]
+
+[dependencies]
+tun2proxy = { version = "0.8", default-features = false, features = ["udpgw", "virtual_dns"] }
+tokio = { version = "1.40", features = ["full"] }
+clap = { version = "4.5", features = ["derive"] }
+log = "0.4"
+android_logger = "0.13"
+
+[target.'cfg(target_os = "android")'.dependencies]
+jni = { version = "0.21", default-features = false }
+android_system_properties = "0.1"
